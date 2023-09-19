@@ -2,10 +2,12 @@ const squares = document.querySelectorAll('.square');
 const colorChange = "lightgreen";
 const revertColor = "#ccc"
 let rotation = 0;
+let clickRotation = 0;
 let checkRotation = 0;
 let isUnique = true;
 let Progress = true;
 let originalSequence = [];
+let clickedSequence = [];
 
 function changeColor() {
     checkRotation = 0;
@@ -20,10 +22,10 @@ function changeColor() {
             checkRotation++;
         }
     }
-    
+
 
     if (isUnique == true) {
-        originalSequence [rotation] = randomSquare;
+        originalSequence[rotation] = randomSquare;
         setTimeout(() => {
             squares[randomSquare].style.backgroundColor = colorChange;
         }, 2500);
@@ -45,8 +47,14 @@ function changeColor() {
 
 changeColor();
 
-squares.forEach((square) => {
+
+squares.forEach((square, index) => {
     square.addEventListener('click', () => {
         square.style.backgroundColor = colorChange;
+        clickedSequence[clickRotation] = index;
+        clickRotation++;
     })
 })
+
+console.log (originalSequence);
+console.log (clickedSequence);
