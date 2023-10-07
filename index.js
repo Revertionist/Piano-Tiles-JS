@@ -80,8 +80,8 @@ function check() {
     }
 
     if (win) {
-        window.open('pages/win.html', '_self');
+        window.open('win.html', '_self');
     } else {
-        window.open('pages/lose.html', '_self');
+        window.open('lose.html', '_self');
     }
 }
