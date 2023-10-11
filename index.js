@@ -9,6 +9,7 @@ function gameplay() {
     let clickRotation = 0;
     let checkRotation = 0;
     let isUnique = true;
+    let clickUnique = true;
     let originalSequence = [];
     let clickedSequence = [];
     let win = true;
@@ -71,9 +72,18 @@ function gameplay() {
                 if (!clickEnable) return;
 
                 square.style.backgroundColor = colorChange;
-                clickedSequence[clickRotation] = index;
-                clickRotation++;
 
+                clickedSequence.forEach(element => {
+                    if (element === index) {
+                        clickUnique = false;
+                    }
+                });
+
+                if (clickUnique === true){
+                    clickedSequence[clickRotation] = index;
+                    clickRotation++;
+                }
+                clickUnique = true
                 if (clickedSequence.length === originalSequence.length)
                     check();
             })
