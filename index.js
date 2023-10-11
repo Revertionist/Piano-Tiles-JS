@@ -17,6 +17,7 @@ function gameplay() {
 
 
     function changeColor() {
+        clickEnable = false;
         console.log(maxRotation);
         checkRotation = 0;
         isUnique = true;
@@ -50,7 +51,9 @@ function gameplay() {
                 if (rotation < maxRotation)
                     changeColor();
                 else
-                    clickEnable = true;
+                    setTimeout(() => {
+                        clickEnable = true;
+                    }, 2500);
             }, 1000);
         } else {
             changeColor();
