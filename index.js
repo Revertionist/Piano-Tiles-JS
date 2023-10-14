@@ -1,7 +1,8 @@
 const colorChange = "lightgreen";
 const revertColor = "#ccc";
 let maxRotation = 1;
-const container = document.getElementById('container')
+const container = document.getElementById('container');
+const instruction = document.getElementById('instruction');
 let numSquares;
 let squares;
 const queryString = window.location.search;
@@ -10,13 +11,17 @@ const mode = urlParams.get('mode');
 
 if (mode === 'normal') {
     numSquares = 16;
+    container.classList.add('container-normal');
 }
 else if (mode === 'hacker') {
     numSquares = 36
+    container.classList.add('container-hacker');
 }
 
 function updateSquares(num) {
     container.innerHTML = '';
+    
+    
     numSquares = num;
     for (let i = 0; i < numSquares; i++) {
         const square = document.createElement('div');
@@ -95,6 +100,7 @@ function gameplay() {
                 console.log(clickEnable)
                 if (!clickEnable) return;
 
+                removeInstruction();
                 square.style.backgroundColor = colorChange;
 
                 clickedSequence.forEach(element => {
@@ -144,7 +150,7 @@ function gameplay() {
                     }, 1000);
                     changeColor();
                 } else {
-                    window.open('lose.html', '_self');
+                    window.open(`lose.html?mode=${mode}`, '_self');
                 }
             } else {
                 window.open('win.html', '_self');
@@ -153,6 +159,11 @@ function gameplay() {
         }
 
     })
+}
+
+function removeInstruction(){
+    instruction.innerHTML='';
+    return;
 }
 
 updateSquares(numSquares)

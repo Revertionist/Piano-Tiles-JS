@@ -5,8 +5,39 @@
     cursor: pointer;
 }
 
-.container {
+.container-normal {
     display: grid;
     grid-template-columns: repeat(4, 100px);
     gap: 10px;
+}
+.container-hacker {
+    display: grid;
+    grid-template-columns: repeat(6, 100px);
+    gap: 10px;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+.btn{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-red{
+    background-color: red;
+    color: #fff;
+    
+}
+
+.btn-green{
+    background-color: green;
+    color: #fff;
 }

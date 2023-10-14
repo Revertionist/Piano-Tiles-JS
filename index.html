@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Difficulty select</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a id="normal-mode" href="pages/game_page.html?mode=normal" style="text-decoration: none; border: 1px solid black; padding: 5px; border-radius: 10%; background-color: aqua;">Normal Mode</a>
-    <a id="hacker-mode" href="pages/game_page.html?mode=hacker" style="text-decoration: none; border: 1px solid black; padding: 5px; border-radius: 10%; background-color: orange;">Hacker Mode</a>
-    <a id="hacker-mode-plus" href="pages/game_page.html?mode=hacker-plus" style="text-decoration: none; border: 1px solid black; padding: 5px; border-radius: 10%; background-color: red;">Hacker Mode ++</a>
+    <br>
+    <a id="normal-mode" href="pages/game_page.html?mode=normal" class="btn" style="background-color:aqua;">Normal Mode</a>
+    <a id="hacker-mode" href="pages/game_page.html?mode=hacker" class="btn" style="background-color:orange;">Hacker Mode</a>
+    <a id="hacker-mode-plus" href="pages/game_page.html?mode=hacker-plus" class="btn" style="background-color:red">Hacker Mode ++</a>
 </body>
 <script>
     const queryString = window.location.search;
