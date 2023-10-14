@@ -126,7 +126,7 @@ function gameplay() {
         function check() {
             for (let i = 0; i < clickedSequence.length; i++) {
                 console.log(originalSequence[i], clickedSequence[i])
-                if (originalSequence[i] != clickedSequence[i]) {
+                if (!clickedSequence.includes(originalSequence[i])) {
                     win = false;
                     break;
                 }
