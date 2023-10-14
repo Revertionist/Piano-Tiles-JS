@@ -1,7 +1,31 @@
-const squares = document.querySelectorAll('.square');
 const colorChange = "lightgreen";
 const revertColor = "#ccc";
 let maxRotation = 1;
+const container = document.getElementById('container')
+let numSquares;
+let squares;
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const mode = urlParams.get('mode');
+
+if (mode === 'normal') {
+    numSquares = 16;
+}
+else if (mode === 'hacker') {
+    numSquares = 36
+}
+
+function updateSquares(num) {
+    container.innerHTML = '';
+    numSquares = num;
+    for (let i = 0; i < numSquares; i++) {
+        const square = document.createElement('div');
+        square.className = 'square';
+        container.appendChild(square);
+    }
+    squares = document.querySelectorAll('.square');
+}
+
 
 
 function gameplay() {
@@ -79,7 +103,7 @@ function gameplay() {
                     }
                 });
 
-                if (clickUnique === true){
+                if (clickUnique === true) {
                     clickedSequence[clickRotation] = index;
                     clickRotation++;
                 }
@@ -100,7 +124,7 @@ function gameplay() {
                     break;
                 }
             }
-            if (maxRotation != 9) {
+            if (maxRotation != numSquares) {
                 if (win) {
                     maxRotation++;
                     rotation = 0;
@@ -113,7 +137,7 @@ function gameplay() {
                     clickEnable = false;
                     console.log("next round");
                     setTimeout(() => {
-                        for (let i = 0; i < 9; i++) {
+                        for (let i = 0; i < numSquares; i++) {
 
                             squares[i].style.backgroundColor = revertColor;
                         }
@@ -131,5 +155,5 @@ function gameplay() {
     })
 }
 
+updateSquares(numSquares)
 gameplay();
-
