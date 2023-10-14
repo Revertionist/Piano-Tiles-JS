@@ -1,8 +1,15 @@
+.page{
+    background-color: #292b2f;
+    color: #fff;
+}
 .square {
     width: 100px;
     height: 100px;
     background-color: #ccc;
     cursor: pointer;
+}
+.square-red {
+    background-color: #F84F31;
 }
 
 .container-normal {
@@ -32,12 +39,12 @@
 }
 
 .btn-red{
-    background-color: red;
+    background-color: #F84F31;
     color: #fff;
     
 }
 
 .btn-green{
-    background-color: green;
+    background-color: #23C552;
     color: #fff;
 }

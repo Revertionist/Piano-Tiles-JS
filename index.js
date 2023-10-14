@@ -1,8 +1,9 @@
-const colorChange = "lightgreen";
+const colorChange = "#7289da";
+const winColor = "#23C552";
+const loseColor = "#F84F31";
 const revertColor = "#ccc";
 let maxRotation = 1;
 const container = document.getElementById('container');
-const instruction = document.getElementById('instruction');
 let numSquares;
 let squares;
 const queryString = window.location.search;
@@ -19,9 +20,10 @@ else if (mode === 'hacker') {
 }
 
 function updateSquares(num) {
+    alert("Click the squares that glow in the same sequence!");
     container.innerHTML = '';
-    
-    
+
+
     numSquares = num;
     for (let i = 0; i < numSquares; i++) {
         const square = document.createElement('div');
@@ -100,7 +102,6 @@ function gameplay() {
                 console.log(clickEnable)
                 if (!clickEnable) return;
 
-                removeInstruction();
                 square.style.backgroundColor = colorChange;
 
                 clickedSequence.forEach(element => {
@@ -137,11 +138,20 @@ function gameplay() {
                     clickRotation = 0;
                     checkRotation = 0;
                     isUnique = true;
-                    originalSequence = [];
-                    clickedSequence = [];
                     win = true;
                     clickEnable = false;
                     console.log("next round");
+
+                    setTimeout(() => {
+                        for (let i = 0; i < numSquares; i++) {
+                            console.log('red color')
+                            squares[i].style.backgroundColor = winColor;
+                        }
+                    }, 500);
+
+
+                    originalSequence = [];
+                    clickedSequence = [];
                     setTimeout(() => {
                         for (let i = 0; i < numSquares; i++) {
 
@@ -150,7 +160,17 @@ function gameplay() {
                     }, 1000);
                     changeColor();
                 } else {
-                    window.open(`lose.html?mode=${mode}`, '_self');
+                    setTimeout(() => {
+                        for (let i = 0; i < numSquares; i++) {
+                            console.log('red color')
+                            squares[i].style.backgroundColor = loseColor;
+                        }
+
+                    }, 500);
+                    setTimeout(() => {
+                        window.open(`lose.html?mode=${mode}`, '_self');
+                    }, 1000);
+
                 }
             } else {
                 window.open('win.html', '_self');
@@ -161,10 +181,6 @@ function gameplay() {
     })
 }
 
-function removeInstruction(){
-    instruction.innerHTML='';
-    return;
-}
 
 updateSquares(numSquares)
 gameplay();
