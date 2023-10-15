@@ -130,6 +130,39 @@ function gameplay() {
                         seconds -= 1;
                     }
                     else {
+                        gameLostAudio.play();
+
+                        function gameLost() {
+
+                            for (let i = 0; i < numSquares; i++) {
+
+                                squares[i].style.backgroundColor = loseColor;
+                            }
+
+
+
+                            setTimeout(() => {
+                                for (let i = 0; i < numSquares; i++) {
+
+                                    squares[i].style.backgroundColor = revertColor;
+                                }
+                            }, 500);
+                        }
+
+                        function repeatGameLost(counter) {
+                            if (counter < 3) {
+                                setTimeout(() => {
+                                    gameLost();
+                                    repeatGameLost(counter + 1);
+                                }, 700);
+
+                            }
+                        }
+
+                        repeatGameLost(0);
+                        setTimeout(() => {
+                            window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
+                        }, 3700);
                         clearInterval(clearTime);
                     }
                 }, 1000);
@@ -162,8 +195,6 @@ function gameplay() {
                     check();
             })
         })
-
-
 
 
         function check() {
@@ -203,9 +234,9 @@ function gameplay() {
                     setTimeout(() => {
                         nextRoundAudio.play();
                     }, 400)
-                    if (mode === 'hacker') {
-                        setTimer();
-                    }
+
+                    setTimer();
+
 
                     changeColor();
                 } else {
