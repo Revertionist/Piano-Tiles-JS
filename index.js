@@ -1,3 +1,13 @@
+
+// make the website responsive
+// add a timer  
+// add a point system
+// play sound on tile press and termination
+// leaderboard using local storage
+// multiplayer feature that allows one player to set sequence for other player
+// add animation for tiles
+
+
 const colorChange = "#7289da";
 const winColor = "#23C552";
 const loseColor = "#F84F31";
@@ -9,18 +19,23 @@ let squares;
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const mode = urlParams.get('mode');
+let clickAudio = document.getElementById('click-audio');
+clickAudio.playbackRate = 2;
+let gameLostAudio = document.getElementById('game-lost-audio');
+let nextRoundAudio = document.getElementById('game-next-audio');
+let gameWonAudio = document.getElementById('game-won-audio');
 
 if (mode === 'normal') {
     numSquares = 16;
     container.classList.add('container-normal');
 }
 else if (mode === 'hacker') {
-    numSquares = 36
+    numSquares = 4;
     container.classList.add('container-hacker');
 }
 
 function updateSquares(num) {
-    alert("Click the squares that glow in the same sequence!");
+    alert("Click the squares that glow!");
     container.innerHTML = '';
 
 
@@ -46,14 +61,15 @@ function gameplay() {
     let win = true;
     let clickEnable = false;
 
-
+    nextRoundAudio.play();
 
     function changeColor() {
         clickEnable = false;
-        console.log(maxRotation);
         checkRotation = 0;
         isUnique = true;
         let randomSquare = Math.floor(Math.random() * squares.length);
+
+        
 
         while (checkRotation < rotation) {
             if (originalSequence[checkRotation] == randomSquare) {
@@ -64,17 +80,16 @@ function gameplay() {
             }
         }
 
+        
 
         if (isUnique == true) {
             originalSequence[rotation] = randomSquare;
             setTimeout(() => {
                 squares[randomSquare].style.backgroundColor = colorChange;
-                console.log("glow")
             }, 2500);
 
             setTimeout(() => {
                 squares[randomSquare].style.backgroundColor = revertColor;
-                console.log("unglow")
             }, 3000);
 
             rotation++;
@@ -99,7 +114,6 @@ function gameplay() {
 
         squares.forEach((square, index) => {
             square.addEventListener('click', () => {
-                console.log(clickEnable)
                 if (!clickEnable) return;
 
                 square.style.backgroundColor = colorChange;
@@ -111,6 +125,9 @@ function gameplay() {
                 });
 
                 if (clickUnique === true) {
+                    if (mode === 'hacker') {
+                        clickAudio.play();
+                    }
                     clickedSequence[clickRotation] = index;
                     clickRotation++;
                 }
@@ -125,7 +142,6 @@ function gameplay() {
 
         function check() {
             for (let i = 0; i < clickedSequence.length; i++) {
-                console.log(originalSequence[i], clickedSequence[i])
                 if (!clickedSequence.includes(originalSequence[i])) {
                     win = false;
                     break;
@@ -140,11 +156,9 @@ function gameplay() {
                     isUnique = true;
                     win = true;
                     clickEnable = false;
-                    console.log("next round");
 
                     setTimeout(() => {
                         for (let i = 0; i < numSquares; i++) {
-                            console.log('red color')
                             squares[i].style.backgroundColor = winColor;
                         }
                     }, 500);
@@ -158,22 +172,81 @@ function gameplay() {
                             squares[i].style.backgroundColor = revertColor;
                         }
                     }, 1000);
+                    setTimeout(()=>{
+                        nextRoundAudio.play();
+                    },400)
+                    
                     changeColor();
                 } else {
-                    setTimeout(() => {
+                    gameLostAudio.play();
+
+                    function gameLost() {
+
                         for (let i = 0; i < numSquares; i++) {
-                            console.log('red color')
+
                             squares[i].style.backgroundColor = loseColor;
                         }
 
-                    }, 500);
+
+
+                        setTimeout(() => {
+                            for (let i = 0; i < numSquares; i++) {
+
+                                squares[i].style.backgroundColor = revertColor;
+                            }
+                        }, 500);
+                    }
+
+                    function repeatGameLost(counter) {
+                        if (counter < 3) {
+                            setTimeout(() => {
+                                gameLost();
+                                repeatGameLost(counter + 1);
+                            }, 700);
+
+                        }
+                    }
+
+                    repeatGameLost(0);
                     setTimeout(() => {
                         window.open(`lose.html?mode=${mode}`, '_self');
-                    }, 1000);
+                    }, 3700);
 
                 }
             } else {
-                window.open('win.html', '_self');
+                gameWonAudio.play();
+                function gameWon() {
+
+                    for (let i = 0; i < numSquares; i++) {
+
+                        squares[i].style.backgroundColor = winColor;
+                    }
+
+
+
+                    setTimeout(() => {
+                        for (let i = 0; i < numSquares; i++) {
+
+                            squares[i].style.backgroundColor = revertColor;
+                        }
+                    }, 500);
+                }
+
+                function repeatGameWon(counter) {
+                    if (counter < 3) {
+                        setTimeout(() => {
+                            gameWon();
+                            repeatGameWon(counter + 1);
+                        }, 1000);
+
+                    }
+                }
+
+                repeatGameWon(0);
+                setTimeout(() => {
+                    window.open(`win.html?mode=${mode}`, '_self');
+                }, 3700);
+
             }
 
         }

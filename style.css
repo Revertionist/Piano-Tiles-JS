@@ -8,9 +8,6 @@
     background-color: #ccc;
     cursor: pointer;
 }
-.square-red {
-    background-color: #F84F31;
-}
 
 .container-normal {
     display: grid;

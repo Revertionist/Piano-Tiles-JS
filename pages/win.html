@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style.css">
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const mode = urlParams.get('mode');
+    </script>
 </head>
 <body class="page">
     <h1>Get a life</h1>
-    <button class="btn btn-green" onclick="window.open ('game_page.html', '_self')">Play Again</button>
+    <button class="btn btn-green" onclick="window.open (`game_page.html?mode=${mode}`, '_self')">Play Again</button>
     <button class="btn btn-red" onclick="window.open ('../index.html', '_self')">Go Back</button>
 </body>
 </html>
