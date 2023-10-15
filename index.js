@@ -30,7 +30,7 @@ if (mode === 'normal') {
     container.classList.add('container-normal');
 }
 else if (mode === 'hacker') {
-    numSquares = 4;
+    numSquares = 36;
     container.classList.add('container-hacker');
 }
 
