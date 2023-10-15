@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,20 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const mode = urlParams.get('mode');
+        const score = urlParams.get('score');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log(score);
+            document.getElementById("scoring").innerHTML = "Your Score: " + score;
+        });
     </script>
 </head>
+
 <body class="page">
     <h1>Get a life</h1>
+    <h3 id="scoring"></h3>
     <button class="btn btn-green" onclick="window.open (`game_page.html?mode=${mode}`, '_self')">Play Again</button>
     <button class="btn btn-red" onclick="window.open ('../index.html', '_self')">Go Back</button>
 </body>
+
 </html>

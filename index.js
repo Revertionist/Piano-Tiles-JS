@@ -1,13 +1,13 @@
 
 // make the website responsive
-// add a timer  
+// add a timer
 // add a point system
-// play sound on tile press and termination
 // leaderboard using local storage
 // multiplayer feature that allows one player to set sequence for other player
 // add animation for tiles
 
-
+let score = 0;
+let timer = 0;
 const colorChange = "#7289da";
 const winColor = "#23C552";
 const loseColor = "#F84F31";
@@ -20,10 +20,14 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const mode = urlParams.get('mode');
 let clickAudio = document.getElementById('click-audio');
-clickAudio.playbackRate = 2;
 let gameLostAudio = document.getElementById('game-lost-audio');
 let nextRoundAudio = document.getElementById('game-next-audio');
 let gameWonAudio = document.getElementById('game-won-audio');
+clickAudio.playbackRate = 2;
+clickAudio.volume = .3;
+gameLostAudio.volume = .3;
+nextRoundAudio.volume = .1;
+gameWonAudio.volume = .5;
 
 if (mode === 'normal') {
     numSquares = 16;
@@ -69,7 +73,7 @@ function gameplay() {
         isUnique = true;
         let randomSquare = Math.floor(Math.random() * squares.length);
 
-        
+
 
         while (checkRotation < rotation) {
             if (originalSequence[checkRotation] == randomSquare) {
@@ -80,7 +84,7 @@ function gameplay() {
             }
         }
 
-        
+
 
         if (isUnique == true) {
             originalSequence[rotation] = randomSquare;
@@ -149,6 +153,8 @@ function gameplay() {
             }
             if (maxRotation != numSquares) {
                 if (win) {
+                    score = score + 5;
+                    console.log(score);
                     maxRotation++;
                     rotation = 0;
                     clickRotation = 0;
@@ -172,10 +178,10 @@ function gameplay() {
                             squares[i].style.backgroundColor = revertColor;
                         }
                     }, 1000);
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         nextRoundAudio.play();
-                    },400)
-                    
+                    }, 400)
+
                     changeColor();
                 } else {
                     gameLostAudio.play();
@@ -209,7 +215,7 @@ function gameplay() {
 
                     repeatGameLost(0);
                     setTimeout(() => {
-                        window.open(`lose.html?mode=${mode}`, '_self');
+                        window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
                     }, 3700);
 
                 }
@@ -244,7 +250,7 @@ function gameplay() {
 
                 repeatGameWon(0);
                 setTimeout(() => {
-                    window.open(`win.html?mode=${mode}`, '_self');
+                    window.open(`win.html?mode=${mode}&score=${score}`, '_self');
                 }, 3700);
 
             }
