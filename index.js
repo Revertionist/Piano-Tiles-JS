@@ -1,7 +1,5 @@
 
 // make the website responsive
-// add a timer
-// add a point system
 // leaderboard using local storage
 // multiplayer feature that allows one player to set sequence for other player
 // add animation for tiles
@@ -29,6 +27,7 @@ gameLostAudio.volume = .3;
 nextRoundAudio.volume = .1;
 gameWonAudio.volume = .5;
 let clearTime;
+let seconds;
 
 if (mode === 'normal') {
     numSquares = 16;
@@ -117,7 +116,7 @@ function gameplay() {
 
         function setTimer() {
             if (mode === 'hacker') {
-                var seconds = 5 * timeRotation;
+                seconds = 5 * timeRotation;
                 timeRotation++;
 
                 if (clearTime) {
@@ -206,7 +205,12 @@ function gameplay() {
             }
             if (maxRotation != numSquares) {
                 if (win) {
-                    score = score + 5;
+                    if (mode === 'hacker') {
+                        score = score + (5 * seconds);
+                    } else {
+                        score = score + 5;
+                    }
+
                     console.log(score);
                     maxRotation++;
                     rotation = 0;
