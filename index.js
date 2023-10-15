@@ -28,6 +28,7 @@ clickAudio.volume = .3;
 gameLostAudio.volume = .3;
 nextRoundAudio.volume = .1;
 gameWonAudio.volume = .5;
+let clearTime;
 
 if (mode === 'normal') {
     numSquares = 16;
@@ -64,7 +65,7 @@ function gameplay() {
     let clickedSequence = [];
     let win = true;
     let clickEnable = false;
-
+    let timeRotation = 1;
     nextRoundAudio.play();
 
     function changeColor() {
@@ -114,8 +115,29 @@ function gameplay() {
     window.addEventListener("load", () => {
         changeColor();
 
+        function setTimer() {
+            if (mode === 'hacker') {
+                var seconds = 5 * timeRotation;
+                timeRotation++;
+
+                if (clearTime) {
+                    clearInterval(clearTime);
+                }
+
+                clearTime = setInterval(() => {
+                    if (seconds >= 0) {
+                        document.querySelector(".timer").innerHTML = "Timer: " + seconds;
+                        seconds -= 1;
+                    }
+                    else {
+                        clearInterval(clearTime);
+                    }
+                }, 1000);
+            }
+        }
 
 
+        setTimer();
         squares.forEach((square, index) => {
             square.addEventListener('click', () => {
                 if (!clickEnable) return;
@@ -181,6 +203,9 @@ function gameplay() {
                     setTimeout(() => {
                         nextRoundAudio.play();
                     }, 400)
+                    if (mode === 'hacker') {
+                        setTimer();
+                    }
 
                     changeColor();
                 } else {
