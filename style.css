@@ -1,7 +1,8 @@
-.page{
+.page {
     background-color: #292b2f;
     color: #fff;
 }
+
 .square {
     width: 100px;
     height: 100px;
@@ -14,17 +15,19 @@
     grid-template-columns: repeat(4, 100px);
     gap: 10px;
 }
+
 .container-hacker {
     display: grid;
     grid-template-columns: repeat(6, 100px);
     gap: 10px;
 }
 
-.center{
+.center {
     justify-content: center;
     align-items: center;
 }
-.btn{
+
+.btn {
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -35,13 +38,13 @@
     color: black;
 }
 
-.btn-red{
+.btn-red {
     background-color: #F84F31;
     color: #fff;
-    
+
 }
 
-.btn-green{
+.btn-green {
     background-color: #23C552;
     color: #fff;
 }
@@ -52,11 +55,52 @@
     margin-left: -15%;
 }
 
+.responsive-normal {
+    scale: 60%;
+}
+
+.responsive-hacker {
+    margin-top: -30%;
+    margin-bottom: -30%;
+    scale: 50%;
+}
+
 @media only screen and (min-width: 768px) {
     .wrapper {
         padding-top: 10px;
         width: 100%;
         scale: 150%;
         margin-left: 25%;
+    }
+
+    .responsive-normal {
+        scale: 100%;
+        padding: 200px 30px 200px 30px;
+    }
+
+    .responsive-hacker {
+        scale: 100%;
+        padding: 100px 30px 100px 30px;
+        margin:0%
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .wrapper {
+        padding-top: 10px;
+        width: 100%;
+        scale: 150%;
+        margin-left: 25%;
+    }
+
+    .responsive-normal {
+        scale: 100%;
+        padding: 60px 30px 70px 30px;
+    }
+
+    .responsive-hacker {
+        scale: 70%;
+        margin-top: -10%;
+        margin-bottom: -10%;
     }
 }

@@ -1,4 +1,3 @@
-// make the website responsive - all
 // leaderboard using local storage - hacker
 // multiplayer feature that allows one player to set sequence for other player - hacker++
 // add animation for tiles - hacker++
@@ -124,7 +123,18 @@ function gameplay() {
                         function gameLost() {
                             for (let i = 0; i < numSquares; i++) {
                                 squares[i].style.backgroundColor = loseColor;
-                            }
+                                ameLostAudio.play();
+
+                                function gameLost() {
+                                    for (let i = 0; i < numSquares; i++) {
+                                        squares[i].style.backgroundColor = loseColor;
+                                    }
+                                    setTimeout(() => {
+                                        for (let i = 0; i < numSquares; i++) {
+                                            squares[i].style.backgroundColor = revertColor;
+                                        }
+                                    }, 500);
+                                } }
                             setTimeout(() => {
                                 for (let i = 0; i < numSquares; i++) {
                                     squares[i].style.backgroundColor = revertColor;
@@ -144,7 +154,18 @@ function gameplay() {
 
                         repeatGameLost(0);
                         setTimeout(() => {
-                            window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
+                            ameLostAudio.play();
+
+                            function gameLost() {
+                                for (let i = 0; i < numSquares; i++) {
+                                    squares[i].style.backgroundColor = loseColor;
+                                }
+                                setTimeout(() => {
+                                    for (let i = 0; i < numSquares; i++) {
+                                        squares[i].style.backgroundColor = revertColor;
+                                    }
+                                }, 500);
+                            } window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
                         }, 3700);
                         clearInterval(clearTime);
                     }

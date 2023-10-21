@@ -9,17 +9,24 @@
 </head>
 
 <body class="page">
-        <h1>Game Page</h1>
-        <div class="container center" id="container">
-            
-        </div>
-        <div class = "timer"></div>
-        <button class="btn btn-red" onclick="window.open ('../index.html', '_self')">Go Back</button>
-        <audio id="click-audio" src="../attributes/retro-click.wav"></audio>
-        <audio id="game-lost-audio" src="../attributes/retro-game-lost.mp3"></audio>
-        <audio id="game-next-audio" src="../attributes/retro-game-next.mp3"></audio>
-        <audio id="game-won-audio" src="../attributes/retro-game-won.wav"></audio>
-        <script src="../index.js"></script>
+    <h1>Game Page</h1>
+    <div class="container center" id="container" id="class-change">
+
+    </div>
+    <div class="timer"></div>
+    <button class="btn btn-red" onclick="window.open ('../index.html', '_self')">Go Back</button>
+    <audio id="click-audio" src="../attributes/retro-click.wav"></audio>
+    <audio id="game-lost-audio" src="../attributes/retro-game-lost.mp3"></audio>
+    <audio id="game-next-audio" src="../attributes/retro-game-next.mp3"></audio>
+    <audio id="game-won-audio" src="../attributes/retro-game-won.wav"></audio>
+    <script src="../index.js"></script>
+    <script>
+        if (mode == "normal"){
+            container.classList.add ("responsive-normal");
+        } else if (mode == "hacker") {
+            container.classList.add ("responsive-hacker");
+        }
+    </script>
 </body>
 
 </html>
