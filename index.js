@@ -1,8 +1,7 @@
-
-// make the website responsive
-// leaderboard using local storage
-// multiplayer feature that allows one player to set sequence for other player
-// add animation for tiles
+// make the website responsive - all
+// leaderboard using local storage - hacker
+// multiplayer feature that allows one player to set sequence for other player - hacker++
+// add animation for tiles - hacker++
 
 let score = 0;
 let timer = 0;
@@ -41,8 +40,6 @@ else if (mode === 'hacker') {
 function updateSquares(num) {
     alert("Click the squares that glow!");
     container.innerHTML = '';
-
-
     numSquares = num;
     for (let i = 0; i < numSquares; i++) {
         const square = document.createElement('div');
@@ -51,8 +48,6 @@ function updateSquares(num) {
     }
     squares = document.querySelectorAll('.square');
 }
-
-
 
 function gameplay() {
     let rotation = 0;
@@ -72,9 +67,6 @@ function gameplay() {
         checkRotation = 0;
         isUnique = true;
         let randomSquare = Math.floor(Math.random() * squares.length);
-
-
-
         while (checkRotation < rotation) {
             if (originalSequence[checkRotation] == randomSquare) {
                 isUnique = false;
@@ -83,8 +75,6 @@ function gameplay() {
                 checkRotation++;
             }
         }
-
-
 
         if (isUnique == true) {
             originalSequence[rotation] = randomSquare;
@@ -132,17 +122,11 @@ function gameplay() {
                         gameLostAudio.play();
 
                         function gameLost() {
-
                             for (let i = 0; i < numSquares; i++) {
-
                                 squares[i].style.backgroundColor = loseColor;
                             }
-
-
-
                             setTimeout(() => {
                                 for (let i = 0; i < numSquares; i++) {
-
                                     squares[i].style.backgroundColor = revertColor;
                                 }
                             }, 500);
@@ -168,20 +152,16 @@ function gameplay() {
             }
         }
 
-
         setTimer();
         squares.forEach((square, index) => {
             square.addEventListener('click', () => {
                 if (!clickEnable) return;
-
                 square.style.backgroundColor = colorChange;
-
                 clickedSequence.forEach(element => {
                     if (element === index) {
                         clickUnique = false;
                     }
                 });
-
                 if (clickUnique === true) {
                     if (mode === 'hacker') {
                         clickAudio.play();
@@ -194,7 +174,6 @@ function gameplay() {
                     check();
             })
         })
-
 
         function check() {
             for (let i = 0; i < clickedSequence.length; i++) {
@@ -210,8 +189,6 @@ function gameplay() {
                     } else {
                         score = score + 5;
                     }
-
-                    console.log(score);
                     maxRotation++;
                     rotation = 0;
                     clickRotation = 0;
@@ -219,14 +196,11 @@ function gameplay() {
                     isUnique = true;
                     win = true;
                     clickEnable = false;
-
                     setTimeout(() => {
                         for (let i = 0; i < numSquares; i++) {
                             squares[i].style.backgroundColor = winColor;
                         }
                     }, 500);
-
-
                     originalSequence = [];
                     clickedSequence = [];
                     setTimeout(() => {
@@ -238,26 +212,17 @@ function gameplay() {
                     setTimeout(() => {
                         nextRoundAudio.play();
                     }, 400)
-
                     setTimer();
-
-
                     changeColor();
                 } else {
                     gameLostAudio.play();
 
                     function gameLost() {
-
                         for (let i = 0; i < numSquares; i++) {
-
                             squares[i].style.backgroundColor = loseColor;
                         }
-
-
-
                         setTimeout(() => {
                             for (let i = 0; i < numSquares; i++) {
-
                                 squares[i].style.backgroundColor = revertColor;
                             }
                         }, 500);
@@ -269,30 +234,23 @@ function gameplay() {
                                 gameLost();
                                 repeatGameLost(counter + 1);
                             }, 700);
-
                         }
                     }
-
                     repeatGameLost(0);
                     setTimeout(() => {
                         window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
                     }, 3700);
-
                 }
             } else {
                 gameWonAudio.play();
-                function gameWon() {
 
+                function gameWon() {
                     for (let i = 0; i < numSquares; i++) {
 
                         squares[i].style.backgroundColor = winColor;
                     }
-
-
-
                     setTimeout(() => {
                         for (let i = 0; i < numSquares; i++) {
-
                             squares[i].style.backgroundColor = revertColor;
                         }
                     }, 500);
@@ -307,19 +265,13 @@ function gameplay() {
 
                     }
                 }
-
                 repeatGameWon(0);
                 setTimeout(() => {
                     window.open(`win.html?mode=${mode}&score=${score}`, '_self');
                 }, 3700);
-
             }
-
         }
-
     })
 }
-
-
 updateSquares(numSquares)
 gameplay();

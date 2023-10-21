@@ -45,3 +45,18 @@
     background-color: #23C552;
     color: #fff;
 }
+
+.wrapper {
+    width: 150%;
+    scale: 80%;
+    margin-left: -15%;
+}
+
+@media only screen and (min-width: 768px) {
+    .wrapper {
+        padding-top: 10px;
+        width: 100%;
+        scale: 150%;
+        margin-left: 25%;
+    }
+}
