@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Difficulty select</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="page">
-    <div class = "wrapper">
+    <div>
+        <h1>Username:</h1>
+        <label>
+            <input id="username" name="username" type="textbox">
+        </label>
         <br>
-        <a id="normal-mode" href="pages/game_page.html?mode=normal" class="btn" style="background-color:aqua;">Normal Mode</a>
-        <a id="hacker-mode" href="pages/game_page.html?mode=hacker" class="btn" style="background-color:orange;">Hacker Mode</a>
-        <a id="hacker-mode-plus" href="pages/game_page.html?mode=hacker-plus" class="btn" style="background-color:red">Hacker Mode ++</a>
+        <br>
+        <br>
+        <a id="gameLink" href="pages/difficulty.html?name=" class="btn" style="background-color:rgb(0, 153, 255);">Start</a>
     </div>
+    <script>
+        const username = document.getElementById("username");
+        const gameLink = document.getElementById("gameLink");
+
+        username.addEventListener("input", ()=>{
+            gameLink.href = `pages/difficulty.html?name=${username.value}`;
+        });
+    </script>
 </body>
-<script>
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const name = urlParams.get('name');
-</script>
 </html>

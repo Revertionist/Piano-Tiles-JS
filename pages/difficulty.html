@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difficulty select</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="page">
+    <div class="wrapper">
+        <br>
+        <a id="normal-mode" href="game_page.html?name=&mode=" class="btn" style="background-color:aqua;">Normal Mode</a>
+        <a id="hacker-mode" href="game_page.html?name=&mode=" class="btn" style="background-color:orange;">Hacker Mode</a>
+        <a id="hacker-mode-plus" href="game_page.html?name=&mode=" class="btn" style="background-color:red">Hacker Mode ++</a>
+    </div>
+    <script>
+        const currentUrl = window.location.href;
+        const url = new URL(currentUrl);
+        const name = url.searchParams.get('name');
+        const normalModeLink = document.getElementById("normal-mode");
+        const hackerModeLink = document.getElementById("hacker-mode");
+        const hackerModePlusLink = document.getElementById("hacker-mode-plus");
+
+        normalModeLink.addEventListener("click", () => {
+            normalModeLink.href = `game_page.html?name=${name}&mode=normal`;
+        });
+
+        hackerModeLink.addEventListener("click", () => {
+            hackerModeLink.href = `game_page.html?name=${name}&mode=hacker`;
+        });
+
+        hackerModePlusLink.addEventListener("click", () => {
+            hackerModePlusLink.href = `game_page.html?name=${name}&mode=hackerplus`;
+        });
+    </script>
+</body>
+
+</html>

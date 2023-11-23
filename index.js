@@ -26,6 +26,9 @@ nextRoundAudio.volume = .1;
 gameWonAudio.volume = .5;
 let clearTime;
 let seconds;
+const currentUrl = window.location.href;
+const url = new URL(currentUrl);
+const username = url.searchParams.get('name');
 
 if (mode === 'normal') {
     numSquares = 16;
@@ -134,7 +137,8 @@ function gameplay() {
                                             squares[i].style.backgroundColor = revertColor;
                                         }
                                     }, 500);
-                                } }
+                                }
+                            }
                             setTimeout(() => {
                                 for (let i = 0; i < numSquares; i++) {
                                     squares[i].style.backgroundColor = revertColor;
@@ -165,7 +169,7 @@ function gameplay() {
                                         squares[i].style.backgroundColor = revertColor;
                                     }
                                 }, 500);
-                            } window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
+                            } window.open(`lose.html?name=${username}&mode=${mode}&score=${score}`, '_self');
                         }, 3700);
                         clearInterval(clearTime);
                     }
@@ -259,7 +263,7 @@ function gameplay() {
                     }
                     repeatGameLost(0);
                     setTimeout(() => {
-                        window.open(`lose.html?mode=${mode}&score=${score}`, '_self');
+                        window.open(`lose.html?name=${username}&mode=${mode}&score=${score}`, '_self');
                     }, 3700);
                 }
             } else {
@@ -288,7 +292,7 @@ function gameplay() {
                 }
                 repeatGameWon(0);
                 setTimeout(() => {
-                    window.open(`win.html?mode=${mode}&score=${score}`, '_self');
+                    window.open(`win.html?name=${username}mode=${mode}&score=${score}`, '_self');
                 }, 3700);
             }
         }
