@@ -11,6 +11,9 @@
         const urlParams = new URLSearchParams(queryString);
         const mode = urlParams.get('mode');
         const score = urlParams.get('score');
+        const currentUrl = window.location.href;
+        const url = new URL(currentUrl);
+        const username = url.searchParams.get('name');
 
         document.addEventListener('DOMContentLoaded', () => {
             console.log(score);
@@ -24,6 +27,7 @@
     <h3 id="scoring"></h3>
     <button class="btn btn-green" onclick="window.open (`game_page.html?mode=${mode}`, '_self')">Play Again</button>
     <button class="btn btn-red" onclick="window.open ('../index.html', '_self')">Go Back</button>
+    <button class="btn btn-blue" onclick="window.open (`leaderboard.html?name=${username}&mode=${mode}&score=${score}`, '_self')">Leaderboard</button>
 </body>
 
 </html>

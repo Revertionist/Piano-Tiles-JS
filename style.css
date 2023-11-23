@@ -49,6 +49,11 @@
     color: #fff;
 }
 
+.btn-blue {
+    background-color: #7289da;
+    color: #fff
+}
+
 .wrapper {
     width: 150%;
     scale: 80%;
